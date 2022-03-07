@@ -6,8 +6,8 @@ const fs = require("fs");
 const e = require("express");
 
 //저장 경로 및 이름 설정
-const filePath = "out/issue.json";
-
+const filePath = __dirname + "/../out/issue.json";
+console.log(filePath);
 function getIssueAPItoJsonFile(ApiDataMessage) {
   fs.readFile(filePath, "utf-8", (err, data) => {
     let [title, message] = ApiDataMessage.split("|").map((value) =>
