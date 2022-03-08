@@ -4,10 +4,13 @@ const port = 404;
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const e = require("express");
+const cors = require("cors");
 
 //저장 경로 및 이름 설정
-const filePath = __dirname + "/../out/issue.json";
+const filePath = __dirname +"/../../out/issue.json";
+
 console.log(filePath);
+
 function getIssueAPItoJsonFile(ApiDataMessage) {
   fs.readFile(filePath, "utf-8", (err, data) => {
     let [title, message] = ApiDataMessage.split("|").map((value) =>
@@ -38,6 +41,8 @@ function getIssueAPItoJsonFile(ApiDataMessage) {
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.post("/api", (res, req) => {
   if (
