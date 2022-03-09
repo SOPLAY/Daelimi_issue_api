@@ -7,13 +7,13 @@ const e = require("express");
 const cors = require("cors");
 
 //저장 경로 및 이름 설정
-const filePath = __dirname +"/../../out/issue.json";
+const filePath = __dirname + "/../../out/issue.json";
 
 console.log(filePath);
 
 function getIssueAPItoJsonFile(ApiDataMessage) {
   fs.readFile(filePath, "utf-8", (err, data) => {
-    let [title, message] = ApiDataMessage.split("|").map((value) =>
+    let [title, message] = ApiDataMessage.split("||").map((value) =>
       value.trim()
     );
     if (err) {
@@ -48,7 +48,7 @@ app.post("/api", (res, req) => {
   if (
     !res.body.message ||
     res.body.isFilter !== "404" ||
-    !res.body.message.includes("|")
+    !res.body.message.includes("||")
   ) {
     console.log(`전달받은 파라미터오류`);
     console.log(
